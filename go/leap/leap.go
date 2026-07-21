@@ -11,5 +11,14 @@ func IsLeapYear(year int) bool {
 	// Then remove all the stock comments.
 	// They're here to help you get started but they only clutter a finished solution.
 	// If you leave them in, reviewers may protest!
-	panic("Please implement the IsLeapYear function")
+	if year%4 == 0 {
+		if year%100 == 0 {
+			return year%400 == 0
+		}
+		return true
+	}
+	return false
 }
+
+// - In every year that is evenly divisible by 4.
+// - Unless the year is evenly divisible by 100, in which case it's only a leap year if the year is also evenly divisible by 400.
