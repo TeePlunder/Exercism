@@ -1,28 +1,39 @@
 package luhn
 
 import (
-	"fmt"
 	"regexp"
 	"strconv"
 	"strings"
 )
 
 func Valid(id string) bool {
-	if len(id) <= 1 {
+	trimedId := strings.ReplaceAll(id, " ", "")
+
+	if len(trimedId) <= 1 {
 		return false
 	}
 
 	onlyDigitsRegex := regexp.MustCompile(`^[0-9]+$`)
 
-	if !onlyDigitsRegex.MatchString(id) {
+	if !onlyDigitsRegex.MatchString(trimedId) {
 		return false
 	}
 
-	trimedId := strings.TrimSpace(id)
-
 	doubledId := doubleEverySecond(trimedId)
 
-	return true
+	sumIsValid := sumIsValid(doubledId)
+
+	return sumIsValid
+}
+
+func sumIsValid(id string) bool {
+	sum := 0
+	for _, element := range id {
+		digit := int(element - '0')
+		sum += digit
+	}
+
+	return sum%10 == 0
 }
 
 func doubleEverySecond(id string) string {
