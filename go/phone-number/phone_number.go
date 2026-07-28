@@ -1,7 +1,30 @@
 package phonenumber
 
+import (
+	"errors"
+	"regexp"
+)
+
 func Number(phoneNumber string) (string, error) {
-	panic("Please implement the Number function")
+	nonDigitRegex := regexp.MustCompile(`\D`)
+
+	cleanedPhoneNumber := nonDigitRegex.ReplaceAllString(phoneNumber, "")
+
+	cleanedPhoneNumberLength := len(cleanedPhoneNumber)
+
+	if cleanedPhoneNumberLength == 11 && cleanedPhoneNumber[0] == '1' {
+		cleanedPhoneNumber = cleanedPhoneNumber[1:]
+	}
+
+	// checking for N in NXX NXX-XXXX (N is in between 2 and 9)
+	firstN := toDigit(cleanedPhoneNumber[0])
+	secondN := toDigit(cleanedPhoneNumber[3])
+
+	if !isValidN(firstN) || !isValidN(secondN) {
+		return "", errors.New("invalid N")
+	}
+
+	return cleanedPhoneNumber, nil
 }
 
 func AreaCode(phoneNumber string) (string, error) {
@@ -10,4 +33,12 @@ func AreaCode(phoneNumber string) (string, error) {
 
 func Format(phoneNumber string) (string, error) {
 	panic("Please implement the Format function")
+}
+
+func toDigit(element byte) int {
+	return int(element - '0')
+}
+
+func isValidN(n int) bool {
+	return 2 <= n || n <= 9
 }
