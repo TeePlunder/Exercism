@@ -2,6 +2,7 @@ package phonenumber
 
 import (
 	"errors"
+	"fmt"
 	"regexp"
 )
 
@@ -37,7 +38,14 @@ func AreaCode(phoneNumber string) (string, error) {
 }
 
 func Format(phoneNumber string) (string, error) {
-	panic("Please implement the Format function")
+	cleanedPhoneNumber, err := Number(phoneNumber)
+	if err != nil {
+		return "", err
+	}
+
+	formatted := fmt.Sprintf("(%s) %s-%s", cleanedPhoneNumber[0:3], cleanedPhoneNumber[3:6], cleanedPhoneNumber[6:])
+
+	return formatted, nil
 }
 
 func toDigit(element byte) int {
