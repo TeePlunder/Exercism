@@ -13,7 +13,18 @@ func Number(phoneNumber string) (string, error) {
 
 	cleanedPhoneNumberLength := len(cleanedPhoneNumber)
 
-	if cleanedPhoneNumberLength == 11 && cleanedPhoneNumber[0] == '1' {
+	if cleanedPhoneNumberLength < 10 {
+		return "", errors.New("to short")
+	}
+
+	if cleanedPhoneNumberLength > 11 {
+		return "", errors.New("to long")
+	}
+
+	if cleanedPhoneNumberLength == 11 {
+		if cleanedPhoneNumber[0] != '1' {
+			return "", errors.New("does not start with 1")
+		}
 		cleanedPhoneNumber = cleanedPhoneNumber[1:]
 	}
 
