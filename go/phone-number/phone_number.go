@@ -64,5 +64,5 @@ func toDigit(element byte) int {
 }
 
 func isValidN(n int) bool {
-	return 2 <= n || n <= 9
+	return 2 <= n && n <= 9
 }
