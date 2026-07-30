@@ -9,6 +9,14 @@ func Detect(subject string, candidates []string) []string {
 		lengthFilteredCanidates[i] = strings.ToLower(element)
 	}
 
+	var uniqueCandidates []string
+	for _, element := range lengthFilteredCanidates {
+		if element == subject {
+			continue
+		}
+		uniqueCandidates = append(uniqueCandidates, element)
+	}
+
 	panic("Please implement the Detect function")
 }
 
