@@ -86,5 +86,11 @@ func (s IntList) Append(lst IntList) IntList {
 }
 
 func (s IntList) Concat(lists []IntList) IntList {
-	panic("Please implement the Concat function")
+	allLists := s
+
+	for _, list := range lists {
+		allLists = allLists.Append(list)
+	}
+
+	return allLists
 }
