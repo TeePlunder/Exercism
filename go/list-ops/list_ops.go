@@ -34,7 +34,21 @@ func (s IntList) Reverse() IntList {
 }
 
 func (s IntList) Append(lst IntList) IntList {
-	panic("Please implement the Append function")
+	sLength := s.Length()
+	lstLength := lst.Length()
+	totalLength := sLength + lstLength
+
+	newList := make(IntList, totalLength)
+
+	for i, element := range s {
+		newList[i] = element
+	}
+
+	for i, element := range lst {
+		newList[sLength+i] = element
+	}
+
+	return newList
 }
 
 func (s IntList) Concat(lists []IntList) IntList {
