@@ -4,11 +4,23 @@ package listops
 type IntList []int
 
 func (s IntList) Foldl(fn func(int, int) int, initial int) int {
-	panic("Please implement the Foldl function")
+	accumulator := initial
+
+	for _, element := range s {
+		accumulator = fn(accumulator, element)
+	}
+
+	return accumulator
 }
 
 func (s IntList) Foldr(fn func(int, int) int, initial int) int {
-	panic("Please implement the Foldr function")
+	accumulator := initial
+
+	for i := s.Length() - 1; i >= 0; i-- {
+		accumulator = fn(s[i], accumulator)
+	}
+
+	return accumulator
 }
 
 func (s IntList) Filter(fn func(int) bool) IntList {
