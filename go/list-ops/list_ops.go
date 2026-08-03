@@ -39,7 +39,16 @@ func (s IntList) Map(fn func(int) int) IntList {
 }
 
 func (s IntList) Reverse() IntList {
-	panic("Please implement the Reverse function")
+	sLength := s.Length()
+	reversedList := make(IntList, sLength)
+
+	normalIndex := 0
+	for i := sLength - 1; i >= 0; i-- {
+		reversedList[i] = s[normalIndex]
+		normalIndex++
+	}
+
+	return reversedList
 }
 
 func (s IntList) Append(lst IntList) IntList {
