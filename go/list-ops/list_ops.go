@@ -12,7 +12,16 @@ func (s IntList) Foldr(fn func(int, int) int, initial int) int {
 }
 
 func (s IntList) Filter(fn func(int) bool) IntList {
-	panic("Please implement the Filter function")
+	filteredList := IntList{}
+	for _, element := range s {
+		if !fn(element) {
+			continue
+		}
+
+		filteredList = filteredList.Append([]int{element})
+	}
+
+	return filteredList
 }
 
 func (s IntList) Length() int {
